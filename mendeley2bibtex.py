@@ -20,7 +20,7 @@
 database to BibTeX not provided by the closed source Mendeley Desktop software.
 
     First locate your database. On Linux systems it is:
-    
+
 ls ~/.local/share/data/Mendeley\ Ltd./Mendeley\
 Desktop/your@email.com@www.mendeley.com.sqlite
 
@@ -58,12 +58,13 @@ francois.bianco@unige.ch
 
 """
 
+import sqlite3
 import sys
 from optparse import OptionParser
-import sqlite3
-import re
+
 
 version = '0.01'
+
 
 def clean_char(entry):
     """A helper function to convert special characters to LaTeX characters"""
@@ -71,23 +72,24 @@ def clean_char(entry):
     # List of char and replacement, add your own list below
     char_to_replace = {
         # LaTeX special char
-        '&':'\&',
+        '&': '\&',
         # UTF8 not understood by inputenc
-        u'–':'--', # utf8 2014, special dash
-        u'—':'--', # utf8 2013, special dash
-        u'∕':'/',  # utf8 2215, math division
-        u'κ':'k', # Greek kappa
-        u'×':'x', # times
-        }
+        u'–': '--',  # utf8 2014, special dash
+        u'—': '--',  # utf8 2013, special dash
+        u'∕': '/',  # utf8 2215, math division
+        u'κ': 'k',  # Greek kappa
+        u'×': 'x',  # times
+    }
 
     # Which field shall we check and convert
-    entry_key=['publisher','publication','title']
+    entry_key = ['publisher', 'publication', 'title']
 
     for k in entry_key:
         for char, repl_char in char_to_replace.iteritems():
-            entry[k] = entry[k].replace(char,repl_char)
+            entry[k] = entry[k].replace(char, repl_char)
 
-#from string import capwords
+
+# from string import capwords
 def capwords(s):
     """Reimplement a custom capitalize word function which keeps words
 unchanged except the first letter (useful for chemical compounds and
@@ -95,18 +97,19 @@ special abreviation with capital letter within the word) and which capitalizes
 both words of hyphenated words."""
 
     for sep in (' ', '-'):
-       s = sep.join( x[0].capitalize()+x[1:] \
-                for x in s.split(sep) if x )
+        s = sep.join(x[0].capitalize() + x[1:] \
+                     for x in s.split(sep) if x)
 
-    ## Expanded version for tests/debugging ;-)
-    #for sep in (' ', '-'):
-        #new_w = []
-        #for w in s.split(sep):
-            #if not w:
-                #continue
-            #new_w.append( w[0].capitalize()+w[1:] )
-        #s = sep.join(new_w)
+        ## Expanded version for tests/debugging ;-)
+        # for sep in (' ', '-'):
+        # new_w = []
+        # for w in s.split(sep):
+        # if not w:
+        # continue
+        # new_w.append( w[0].capitalize()+w[1:] )
+        # s = sep.join(new_w)
     return s
+
 
 def capitalize_title(entry):
     """Helper function to convert paper title to camel case text, according
@@ -121,11 +124,11 @@ have both words capitalized (except for verbs).
 
     title = capwords(entry['title'])
 
-    word_not_captitalized = ['of','an','on','at', 'to', 'for', 'from', 'in','as',
-                             'by','a','with','and','the','in'] # ,'as'
+    word_not_captitalized = ['of', 'an', 'on', 'at', 'to', 'for', 'from', 'in', 'as',
+                             'by', 'a', 'with', 'and', 'the', 'in']  # ,'as'
     for w in word_not_captitalized:
-        title = title.replace(' '+w.capitalize()+' ',' '+w+' ')
-        title = title.replace('-'+w.capitalize()+'-','-'+w+'-')
+        title = title.replace(' ' + w.capitalize() + ' ', ' ' + w + ' ')
+        title = title.replace('-' + w.capitalize() + '-', '-' + w + '-')
 
     title = title.replace('as Atomic', 'As Atomic')
     entry['title'] = title
@@ -141,6 +144,7 @@ def dict_factory(cursor, row):
             d[col[0]] = ''
     return d
 
+
 def convert(db_name, bibtex_file=sys.stdout, quiet=False):
     """Converts Mendely SQlite database to BibTeX file
     @param db_name The Mendeley SQlite file
@@ -148,24 +152,24 @@ def convert(db_name, bibtex_file=sys.stdout, quiet=False):
 supplied the output is written to the system standard stdout.
     @param quiet If true do not show warnings and errors
     """
-    
+
     db = sqlite3.connect(db_name)
     c = db.cursor()
-    #c.row_factory = sqlite3.Row # CANNOT be used with unicode string formatting
-                                 # since it expect str indexes, and we are using
-                                 # unicode string... grrr... ascii is not dead
-    c.row_factory = dict_factory # allows to use row (entry) as a dict with
-                                 # unicode keys.
-                                 
+    # c.row_factory = sqlite3.Row # CANNOT be used with unicode string formatting
+    # since it expect str indexes, and we are using
+    # unicode string... grrr... ascii is not dead
+    c.row_factory = dict_factory  # allows to use row (entry) as a dict with
+    # unicode keys.
+
     if sys.stdout != bibtex_file:
-        f = open(bibtex_file,'w')
+        f = open(bibtex_file, 'w')
         f.write("""This file was generated automatically by Mendeley To
 BibTeX python script.\n\n""")
     else:
         f = bibtex_file
 
-    for entry in c.execute('''
-    SELECT
+    query = '''
+        SELECT
         D.id,
         D.citationKey,
         D.title,
@@ -178,6 +182,8 @@ BibTeX python script.\n\n""")
         D.month,
         D.year,
         D.pages,
+        DU.url,
+        D.dateAccessed,
         F.localUrl
     FROM Documents D
     LEFT JOIN DocumentCanonicalIds DCI
@@ -186,10 +192,19 @@ BibTeX python script.\n\n""")
         ON D.id = DF.documentId
     LEFT JOIN Files F
         ON F.hash = DF.hash
+    LEFT JOIN DocumentUrls DU
+        ON DU.documentId = D.id
+    LEFT JOIN DocumentFolders DFO
+        ON D.id = DFO.documentId
+    LEFT JOIN Folders FO
+        ON DFO.folderId = FO.id
     WHERE D.confirmed = "true"
     GROUP BY D.citationKey
     ORDER BY D.citationKey
-    ;'''):
+    ;'''
+
+
+    for entry in c.execute(query):
 
         c2 = db.cursor()
         c2.execute('''
@@ -203,7 +218,7 @@ BibTeX python script.\n\n""")
             authors.append(', '.join(author))
         entry['authors'] = ' and '.join(authors)
 
-        #capitalize_title(entry)
+        # capitalize_title(entry)
         clean_char(entry)
 
         # If you need to add more templates:
@@ -236,6 +251,16 @@ BibTeX python script.\n\n""")
     localfile = "{entry[localUrl]}"
 }}'''.format(entry=entry)
 
+        elif "WebPage" == entry['type']:
+            formatted_entry = u'''
+@online{{{entry[citationKey]},
+    author    = "{entry[authors]}",
+    title     = "{entry[title]}",
+    year      = "{entry[year]}",
+    url       = "{entry[url]}",
+    urldate   = "{entry[dateAccessed]}"
+}}'''.format(entry=entry)
+
 
         elif "Book" == entry['type']:
             formatted_entry = u'''
@@ -251,32 +276,32 @@ BibTeX python script.\n\n""")
 
         else:
             if not quiet:
-                print u'''Unhandled entry type {0}, please add your own
-template.'''.format(entry['type'])
+                print(u'''Unhandled entry type {0}, please add your own
+               template.'''.format(entry['type']))
             continue
-        
+
         f.write(formatted_entry.encode("UTF-8"))
 
     if sys.stdout != bibtex_file:
         f.close()
 
 
-def main() :
+def main():
     """Set this script some command line options. See usage."""
 
     global version
 
     parser = OptionParser(usage='''
-  usage: %prog [-o out.bib] mendeley.sqlite''',version='%prog '+version)
+  usage: %prog [-o out.bib] mendeley.sqlite''', version='%prog ' + version)
 
     parser.add_option('-q', '--quiet', action='store_true', default=False,
-                dest='quiet', help='Do not display information.')
+        dest='quiet', help='Do not display information.')
     parser.add_option("-o", "--output", dest="bibtex_file", default=sys.stdout,
-                help="BibTeX file name, else output will be printed to stdout")
+        help="BibTeX file name, else output will be printed to stdout")
 
     (options, args) = parser.parse_args()
 
-    if not args :
+    if not args:
         parser.error('''No file specified''')
 
     db_name = args
@@ -285,7 +310,8 @@ def main() :
 
 
 if __name__ == "__main__":
-    try :
+    try:
         main()
-    except (KeyboardInterrupt) :
-        print "Interrupted by user."
+    except (KeyboardInterrupt):
+        print
+        "Interrupted by user."
