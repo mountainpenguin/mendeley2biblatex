@@ -61,6 +61,8 @@ import sqlite3
 import sys
 from argparse import ArgumentParser
 
+from mendeley2bibetex.FormatedEntry import FormatedEntry
+
 
 version = '0.1.0'
 
@@ -229,55 +231,9 @@ BibTeX python script.\n\n""")
         # If you need to add more templates:
         #    all types of templates are available at
         #    http://www.cs.vassar.edu/people/priestdo/tips/bibtex
-        if "JournalArticle" == entry['type']:
-            formatted_entry = '''
-@article{{{entry[citationKey]},
-    author    = "{entry[authors]}",
-    title     = "{entry[title]}",
-    journal   = "{entry[publication]}",
-    number    = "{entry[issue]}",
-    volume    = "{entry[volume]}",
-    pages     = "{entry[pages]}",
-    year      = "{entry[year]}",
-    doi       = "{entry[doi]}",
-    localfile = "{entry[localUrl]}"
-}}'''.format(entry=entry)
-
-        elif "ConferenceProceedings" == entry['type']:
-            formatted_entry = '''
-@proceedings{{{entry[citationKey]},
-    author    = "{entry[authors]}",
-    title     = "{entry[title]}",
-    publisher = "{entry[publisher]}",
-    pages     = "{entry[pages]}",
-    year      = "{entry[year]}",
-    doi       = "{entry[doi]}",
-    localfile = "{entry[localUrl]}"
-}}'''.format(entry=entry)
-
-        elif "WebPage" == entry['type']:
-            formatted_entry = '''
-@online{{{entry[citationKey]},
-    author    = "{entry[authors]}",
-    title     = "{entry[title]}",
-    year      = "{entry[year]}",
-    url       = "{entry[url]}",
-    urldate   = "{entry[dateAccessed]}"
-}}'''.format(entry=entry)
-
-        elif "Book" == entry['type']:
-            formatted_entry = '''
-@book{{{entry[citationKey]},
-    author    = "{entry[authors]}",
-    title     = "{entry[title]}",
-    publisher = "{entry[publisher]}",
-    year      = "{entry[year]}",
-    volume    = "{entry[volume]}",
-    doi       = "{entry[doi]}",
-    localfile = "{entry[localUrl]}"
-}}'''.format(entry=entry)
-
-        else:
+        try:
+            formatted_entry = FormatedEntry.TEMPLATES.get(entry['type']).format(entry=entry)
+        except AttributeError:
             if not quiet:
                 print('''Unhandled entry type {0}, please add your own
                template.'''.format(entry['type']))
