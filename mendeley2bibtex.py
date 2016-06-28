@@ -60,7 +60,7 @@ francois.bianco@unige.ch
 
 import sqlite3
 import sys
-from optparse import OptionParser
+from argparse import ArgumentParser
 
 
 version = '0.01'
@@ -100,7 +100,7 @@ both words of hyphenated words."""
         s = sep.join(x[0].capitalize() + x[1:] \
                      for x in s.split(sep) if x)
 
-        ## Expanded version for tests/debugging ;-)
+        # Expanded version for tests/debugging ;-)
         # for sep in (' ', '-'):
         # new_w = []
         # for w in s.split(sep):
@@ -145,12 +145,13 @@ def dict_factory(cursor, row):
     return d
 
 
-def convert(db_name, bibtex_file=sys.stdout, quiet=False):
+def convert(db_name, bibtex_file=sys.stdout, quiet=False, folder=None):
     """Converts Mendely SQlite database to BibTeX file
     @param db_name The Mendeley SQlite file
     @param bibtex_file The BibTeX file to output the bibliography, if not
 supplied the output is written to the system standard stdout.
     @param quiet If true do not show warnings and errors
+    @param folder If provided the Rult gets filtered by folder name
     """
 
     db = sqlite3.connect(db_name)
@@ -203,7 +204,6 @@ BibTeX python script.\n\n""")
     ORDER BY D.citationKey
     ;'''
 
-
     for entry in c.execute(query):
 
         c2 = db.cursor()
@@ -238,7 +238,6 @@ BibTeX python script.\n\n""")
     localfile = "{entry[localUrl]}"
 }}'''.format(entry=entry)
 
-
         elif "ConferenceProceedings" == entry['type']:
             formatted_entry = u'''
 @proceedings{{{entry[citationKey]},
@@ -260,7 +259,6 @@ BibTeX python script.\n\n""")
     url       = "{entry[url]}",
     urldate   = "{entry[dateAccessed]}"
 }}'''.format(entry=entry)
-
 
         elif "Book" == entry['type']:
             formatted_entry = u'''
@@ -291,27 +289,28 @@ def main():
 
     global version
 
-    parser = OptionParser(usage='''
-  usage: %prog [-o out.bib] mendeley.sqlite''', version='%prog ' + version)
+    parser = ArgumentParser(description='Convert a sqlite database from mendeley to bibetex')
+    # usage: %prog [-o out.bib] mendeley.sqlite''', version='%prog ' + version)
 
-    parser.add_option('-q', '--quiet', action='store_true', default=False,
+    parser.add_argument('-q', '--quiet', action='store_true', default=False,
         dest='quiet', help='Do not display information.')
-    parser.add_option("-o", "--output", dest="bibtex_file", default=sys.stdout,
+    parser.add_argument('-f', action='store_true', default=False,
+        dest='folder', help='Limit output to mendeley folder')
+    parser.add_argument("-o", "--output", dest="bibtex_file", default=sys.stdout,
         help="BibTeX file name, else output will be printed to stdout")
+    parser.add_argument('input', metavar='INPUT_FILE', nargs='?',
+        help='an integer for the accumulator')
 
-    (options, args) = parser.parse_args()
+    args = parser.parse_args()
 
-    if not args:
+    if not args.input:
         parser.error('''No file specified''')
 
-    db_name = args
-
-    convert(db_name[0], options.bibtex_file, options.quiet)
+    convert(args.input, args.bibtex_file, args.quiet, args.folder)
 
 
 if __name__ == "__main__":
     try:
         main()
-    except (KeyboardInterrupt):
-        print
-        "Interrupted by user."
+    except KeyboardInterrupt:
+        print('Interrupted by user')
