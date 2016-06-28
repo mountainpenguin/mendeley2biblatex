@@ -74,4 +74,6 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# in and output files
 *.sqlite
+*.bib
