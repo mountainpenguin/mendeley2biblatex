@@ -57,13 +57,12 @@ francois.bianco@unige.ch
         First Version
 
 """
-
 import sqlite3
 import sys
 from argparse import ArgumentParser
 
 
-version = '0.01'
+version = '0.1.0'
 
 
 def clean_char(entry):
@@ -74,18 +73,18 @@ def clean_char(entry):
         # LaTeX special char
         '&': '\&',
         # UTF8 not understood by inputenc
-        u'–': '--',  # utf8 2014, special dash
-        u'—': '--',  # utf8 2013, special dash
-        u'∕': '/',  # utf8 2215, math division
-        u'κ': 'k',  # Greek kappa
-        u'×': 'x',  # times
+        '–': '--',  # utf8 2014, special dash
+        '—': '--',  # utf8 2013, special dash
+        '∕': '/',  # utf8 2215, math division
+        'κ': 'k',  # Greek kappa
+        '×': 'x',  # times
     }
 
     # Which field shall we check and convert
     entry_key = ['publisher', 'publication', 'title']
 
     for k in entry_key:
-        for char, repl_char in char_to_replace.iteritems():
+        for char, repl_char in char_to_replace.items():
             entry[k] = entry[k].replace(char, repl_char)
 
 
@@ -200,6 +199,12 @@ BibTeX python script.\n\n""")
     LEFT JOIN Folders FO
         ON DFO.folderId = FO.id
     WHERE D.confirmed = "true"
+    '''
+
+    if folder is not None:
+        query += 'AND FO.name="' + folder + '"'
+
+    query += '''
     GROUP BY D.citationKey
     ORDER BY D.citationKey
     ;'''
@@ -225,7 +230,7 @@ BibTeX python script.\n\n""")
         #    all types of templates are available at
         #    http://www.cs.vassar.edu/people/priestdo/tips/bibtex
         if "JournalArticle" == entry['type']:
-            formatted_entry = u'''
+            formatted_entry = '''
 @article{{{entry[citationKey]},
     author    = "{entry[authors]}",
     title     = "{entry[title]}",
@@ -239,7 +244,7 @@ BibTeX python script.\n\n""")
 }}'''.format(entry=entry)
 
         elif "ConferenceProceedings" == entry['type']:
-            formatted_entry = u'''
+            formatted_entry = '''
 @proceedings{{{entry[citationKey]},
     author    = "{entry[authors]}",
     title     = "{entry[title]}",
@@ -251,7 +256,7 @@ BibTeX python script.\n\n""")
 }}'''.format(entry=entry)
 
         elif "WebPage" == entry['type']:
-            formatted_entry = u'''
+            formatted_entry = '''
 @online{{{entry[citationKey]},
     author    = "{entry[authors]}",
     title     = "{entry[title]}",
@@ -261,7 +266,7 @@ BibTeX python script.\n\n""")
 }}'''.format(entry=entry)
 
         elif "Book" == entry['type']:
-            formatted_entry = u'''
+            formatted_entry = '''
 @book{{{entry[citationKey]},
     author    = "{entry[authors]}",
     title     = "{entry[title]}",
@@ -274,11 +279,10 @@ BibTeX python script.\n\n""")
 
         else:
             if not quiet:
-                print(u'''Unhandled entry type {0}, please add your own
+                print('''Unhandled entry type {0}, please add your own
                template.'''.format(entry['type']))
             continue
-
-        f.write(formatted_entry.encode("UTF-8"))
+        f.write(formatted_entry)
 
     if sys.stdout != bibtex_file:
         f.close()
@@ -294,12 +298,12 @@ def main():
 
     parser.add_argument('-q', '--quiet', action='store_true', default=False,
         dest='quiet', help='Do not display information.')
-    parser.add_argument('-f', action='store_true', default=False,
+    parser.add_argument('-f', '--folder', default=None,
         dest='folder', help='Limit output to mendeley folder')
     parser.add_argument("-o", "--output", dest="bibtex_file", default=sys.stdout,
         help="BibTeX file name, else output will be printed to stdout")
     parser.add_argument('input', metavar='INPUT_FILE', nargs='?',
-        help='an integer for the accumulator')
+        help='the mendeley database')
 
     args = parser.parse_args()
 
