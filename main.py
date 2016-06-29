@@ -1,4 +1,7 @@
+import sys
 from argparse import ArgumentParser
+
+from mendeley2biblatex.library_converter import LibraryConverter
 
 
 def main():
@@ -21,7 +24,7 @@ def main():
     if not args.input:
         parser.error('''No file specified''')
 
-    convert(args.input, args.bibtex_file, args.quiet, args.folder)
+    LibraryConverter.convert_library(args.input, args.bibtex_file, args.quiet, args.folder)
 
 
 if __name__ == "__main__":
