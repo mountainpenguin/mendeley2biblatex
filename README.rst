@@ -15,7 +15,7 @@ Usage
 
 First locate your database. On Linux systems it is:
 
-ls ~/.local/share/data/Mendeley\ Ltd./Mendeley\Desktop/your@email.com@www.mendeley.com.sqlite
+    ls ~/.local/share/data/Mendeley\ Ltd./Mendeley\Desktop/your@email.com@www.mendeley.com.sqlite
 
 The package only reads your database, but to avoid any loss it is **recommended** to  work on a copy of your database
 
