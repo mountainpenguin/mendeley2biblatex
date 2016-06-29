@@ -4,22 +4,23 @@ import sys
 from .bib_entry import BibEntry
 
 
+def dict_factory(cursor, row):
+    """A function to use the SQLite row as dict for string formatting"""
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        if row[idx]:
+            d[col[0]] = row[idx]
+        else:
+            d[col[0]] = ''
+    return d
+
+
 class LibraryConverter:
     @staticmethod
-    def dict_factory(cursor, row):
-        """A function to use the SQLite row as dict for string formatting"""
-        d = {}
-        for idx, col in enumerate(cursor.description):
-            if row[idx]:
-                d[col[0]] = row[idx]
-            else:
-                d[col[0]] = ''
-        return d
-
-    def convert_library(self, db_name, bibtex_file=sys.stdout, quiet=False, folder=None):
+    def convert_library(db_name, bibtex_file=sys.stdout, quiet=False, folder=None):
         """Converts Mendely SQlite database to BibTeX file
         @param db_name The Mendeley SQlite file
-        @param bibtex_file The BibTeX file to output the bibliography, if not
+        @param bibtex_file The BibLaTeX file to output the bibliography, if not
     supplied the output is written to the system standard stdout.
         @param quiet If true do not show warnings and errors
         @param folder If provided the Rult gets filtered by folder name
@@ -30,7 +31,7 @@ class LibraryConverter:
         # c.row_factory = sqlite3.Row # CANNOT be used with unicode string formatting
         # since it expect str indexes, and we are using
         # unicode string... grrr... ascii is not dead
-        c.row_factory = self.dict_factory  # allows to use row (entry) as a dict with
+        c.row_factory = dict_factory  # allows to use row (entry) as a dict with
         # unicode keys.
 
         if sys.stdout != bibtex_file:
@@ -83,7 +84,6 @@ class LibraryConverter:
         ;'''
 
         for entry in c.execute(query):
-
             c2 = db.cursor()
             c2.execute('''
         SELECT lastName, firstNames
@@ -107,8 +107,8 @@ class LibraryConverter:
                 formatted_entry = BibEntry.TEMPLATES.get(entry['type']).format(entry=entry)
             except AttributeError:
                 if not quiet:
-                    print('''Unhandled entry type {0}, please add your own
-                   template.'''.format(entry['type']))
+                    print('''Unhandled entry type {0}, please add your own template.'''.format(
+                        entry['type']))
                 continue
             f.write(formatted_entry)
 
