@@ -1,55 +1,24 @@
-"""
-    \file mendeley2bibtex.py
-    \author François Bianco, University of Geneva – francois.bianco@unige.ch
-    \date 2012.09
+Mendeley2Biblatex
+=================
 
+This package converts a mendeley database to a biblatex file
 
-    \mainpage Mendeley To BibTeX convertor
+It is based on a .. _script: https://github.com/fbianco/mendeley2bibtex written by François Bianco, University of Geneva
 
-    This script converts Mendeley SQlite database to BibTeX file.
+Installation
+------------
+TODO
 
+Usage
+-----
 
-    \section Infos
+First locate your database. On Linux systems it is:
 
-     mendeley2bibtex.py was written by François Bianco, University of Geneva
-– francois.bianco@unige.ch in order to get a correct conversion of Mendely
-database to BibTeX not provided by the closed source Mendeley Desktop software.
+ls ~/.local/share/data/Mendeley\ Ltd./Mendeley\Desktop/your@email.com@www.mendeley.com.sqlite
 
-    First locate your database. On Linux systems it is:
+The package only reads your database, but to avoid any loss it is **recommended** to  work on a copy of your database
 
-ls ~/.local/share/data/Mendeley\ Ltd./Mendeley\
-Desktop/your@email.com@www.mendeley.com.sqlite
+Then run mendeley2biblatex on your file with
 
-    Make a copy of this file, as we assume no responsability for loss of data.
-
-    Then run mendeley2bibtex.py on your file with
-
-        ./mendeley2bibtex.py -o mendeley.bib mendeley.sqlite
-
-
-    \section Copyright
-
-    Copyright © 2012 François Bianco, University of Geneva –
-francois.bianco@unige.ch
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    See COPYING file for the full license.
-
-    \section Updates
-
-    2012.09:
-        First Version
-
-"""
+.. code-block::
+        mendeley2bibtex -o mendeley.bib mendeley.sqlite
