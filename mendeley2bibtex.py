@@ -112,29 +112,6 @@ both words of hyphenated words."""
     return s
 
 
-def capitalize_title(entry):
-    """Helper function to convert paper title to camel case text, according
-    to ACS format : no capital on article and prepositions, hyphenated text
-have both words capitalized (except for verbs).
-
-    BUG : Even hyphenated verbs are capitalized in this version.
-          No possibility to distinguished between As for arsenic and the article
-          Or In for indium or in(side)
-
-    """
-
-    title = capwords(entry['title'])
-
-    word_not_captitalized = ['of', 'an', 'on', 'at', 'to', 'for', 'from', 'in', 'as',
-                             'by', 'a', 'with', 'and', 'the', 'in']  # ,'as'
-    for w in word_not_captitalized:
-        title = title.replace(' ' + w.capitalize() + ' ', ' ' + w + ' ')
-        title = title.replace('-' + w.capitalize() + '-', '-' + w + '-')
-
-    title = title.replace('as Atomic', 'As Atomic')
-    entry['title'] = title
-
-
 def dict_factory(cursor, row):
     """A function to use the SQLite row as dict for string formatting"""
     d = {}
@@ -225,12 +202,13 @@ BibTeX python script.\n\n""")
             authors.append(', '.join(author))
         entry['authors'] = ' and '.join(authors)
 
-        # capitalize_title(entry)
         clean_char(entry)
 
         # If you need to add more templates:
         #    all types of templates are available at
         #    http://www.cs.vassar.edu/people/priestdo/tips/bibtex
+        #    all avaliable types are described in biblatex documentation
+        #    ftp://ftp.mpi-sb.mpg.de/pub/tex/mirror/ftp.dante.de/pub/tex/macros/latex/contrib/biblatex/doc/biblatex.pdf
         try:
             formatted_entry = FormatedEntry.TEMPLATES.get(entry['type']).format(entry=entry)
         except AttributeError:
