@@ -181,19 +181,18 @@ BibTeX python script.\n\n""")
         D.publication,
         D.volume,
         D.issue,
+        D.institution,
         D.month,
         D.year,
         D.pages,
+        D.sourceType,
         DU.url,
-        D.dateAccessed,
-        F.localUrl
+        D.dateAccessed AS urldate
     FROM Documents D
     LEFT JOIN DocumentCanonicalIds DCI
         ON D.id = DCI.documentId
     LEFT JOIN DocumentFiles DF
         ON D.id = DF.documentId
-    LEFT JOIN Files F
-        ON F.hash = DF.hash
     LEFT JOIN DocumentUrls DU
         ON DU.documentId = D.id
     LEFT JOIN DocumentFolders DFO
@@ -201,6 +200,7 @@ BibTeX python script.\n\n""")
     LEFT JOIN Folders FO
         ON DFO.folderId = FO.id
     WHERE D.confirmed = "true"
+    AND D.deletionPending= "false"
     '''
 
     if folder is not None:
