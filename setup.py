@@ -105,7 +105,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'mendeley2biblatex=main:main',
+            'mendeley2biblatex=mendeley2biblatex:main',
         ],
     },
 )
