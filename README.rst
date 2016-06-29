@@ -1,9 +1,10 @@
+=================
 Mendeley2Biblatex
 =================
 
 This package converts a mendeley database to a biblatex file
 
-It is based on a .. _script: https://github.com/fbianco/mendeley2bibtex written by François Bianco, University of Geneva
+It is based on a `script <https://github.com/fbianco/mendeley2bibtex>`_ written by François Bianco, University of Geneva
 
 Installation
 ------------
@@ -20,5 +21,4 @@ The package only reads your database, but to avoid any loss it is **recommended*
 
 Then run mendeley2biblatex on your file with
 
-.. code-block::
-        mendeley2bibtex -o mendeley.bib mendeley.sqlite
+    mendeley2bibtex -o mendeley.bib mendeley.sqlite
