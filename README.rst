@@ -8,7 +8,7 @@ It is based on a `script <https://github.com/fbianco/mendeley2bibtex>`_ written 
 
 Installation
 ------------
-TODO
+    pip install mendeley2biblatex
 
 Usage
 -----
