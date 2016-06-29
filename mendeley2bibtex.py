@@ -59,9 +59,8 @@ francois.bianco@unige.ch
 """
 import sqlite3
 import sys
-from argparse import ArgumentParser
 
-from mendeley2bibetex.FormatedEntry import FormatedEntry
+from mendeley2biblatex.FormatedEntry import FormatedEntry
 
 
 version = '0.1.0'
@@ -162,6 +161,7 @@ BibTeX python script.\n\n""")
         D.month,
         D.year,
         D.pages,
+        D.revisionNumber AS number,
         D.sourceType,
         DU.url,
         D.dateAccessed AS urldate
@@ -220,35 +220,3 @@ BibTeX python script.\n\n""")
 
     if sys.stdout != bibtex_file:
         f.close()
-
-
-def main():
-    """Set this script some command line options. See usage."""
-
-    global version
-
-    parser = ArgumentParser(description='Convert a sqlite database from mendeley to bibetex')
-    # usage: %prog [-o out.bib] mendeley.sqlite''', version='%prog ' + version)
-
-    parser.add_argument('-q', '--quiet', action='store_true', default=False,
-        dest='quiet', help='Do not display information.')
-    parser.add_argument('-f', '--folder', default=None,
-        dest='folder', help='Limit output to mendeley folder')
-    parser.add_argument("-o", "--output", dest="bibtex_file", default=sys.stdout,
-        help="BibTeX file name, else output will be printed to stdout")
-    parser.add_argument('input', metavar='INPUT_FILE', nargs='?',
-        help='the mendeley database')
-
-    args = parser.parse_args()
-
-    if not args.input:
-        parser.error('''No file specified''')
-
-    convert(args.input, args.bibtex_file, args.quiet, args.folder)
-
-
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print('Interrupted by user')

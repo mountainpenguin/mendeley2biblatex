@@ -51,6 +51,17 @@ class FormatedEntry:
     url       = "{entry[url]}",
     urldate   = "{entry[urldate]}"
 }}''',
+        'Patent': '''
+@thesis{{{entry[citationKey]},
+    author    = "{entry[authors]}",
+    title     = "{entry[title]}",
+    number    = "{entry[number]}",
+    year      = "{entry[year]}",
+    type      = "{entry[sourceType]}",
+    doi       = "{entry[doi]}",
+    url       = "{entry[url]}",
+    urldate   = "{entry[urldate]}"
+}}''',
         'Report': '''
 @inbook{{{entry[citationKey]},
     author    = "{entry[authors]}",
