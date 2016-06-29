@@ -39,41 +39,41 @@ class FormatedEntry:
     doi       = "{entry[doi]}",
 }}''',
         'BookSection': '''
-    @inbook{{{entry[citationKey]},
-        author    = "{entry[authors]}",
-        title     = "{entry[title]}",
-        booktitle = "{entry[publication]}"
-        publisher = "{entry[publisher]}",
-        year      = "{entry[year]}",
-        volume    = "{entry[volume]}",
-        pages     = "{entry[pages]}",
-        doi       = "{entry[doi]}",
-        url       = "{entry[url]}",
-        urldate   = "{entry[urldate]}"
-    }}''',
+@inbook{{{entry[citationKey]},
+    author    = "{entry[authors]}",
+    title     = "{entry[title]}",
+    booktitle = "{entry[publication]}"
+    publisher = "{entry[publisher]}",
+    year      = "{entry[year]}",
+    volume    = "{entry[volume]}",
+    pages     = "{entry[pages]}",
+    doi       = "{entry[doi]}",
+    url       = "{entry[url]}",
+    urldate   = "{entry[urldate]}"
+}}''',
         'Report': '''
-        @inbook{{{entry[citationKey]},
-            author    = "{entry[authors]}",
-            title     = "{entry[title]}",
-            type = "{entry[publication]}"
-            institution = "{entry[institution]}",
-            year      = "{entry[year]}",
-            type      = "{entry[sourceType]}",
-            doi       = "{entry[doi]}",
-            pages     = "{entry[pages]}",
-            url       = "{entry[url]}",
-            urldate   = "{entry[urldate]}"
-        }}''',
+@inbook{{{entry[citationKey]},
+    author    = "{entry[authors]}",
+    title     = "{entry[title]}",
+    type = "{entry[publication]}"
+    institution = "{entry[institution]}",
+    year      = "{entry[year]}",
+    type      = "{entry[sourceType]}",
+    doi       = "{entry[doi]}",
+    pages     = "{entry[pages]}",
+    url       = "{entry[url]}",
+    urldate   = "{entry[urldate]}"
+}}''',
         'Thesis': '''
-        @thesis{{{entry[citationKey]},
-            author    = "{entry[authors]}",
-            title     = "{entry[title]}",
-            institution = "{entry[institution]}",
-            year      = "{entry[year]}",
-            type      = "{entry[sourceType]}",
-            doi       = "{entry[doi]}",
-            pages     = "{entry[pages]}",
-            url       = "{entry[url]}",
-            urldate   = "{entry[urldate]}"
-        }}'''
+@thesis{{{entry[citationKey]},
+    author    = "{entry[authors]}",
+    title     = "{entry[title]}",
+    institution = "{entry[institution]}",
+    year      = "{entry[year]}",
+    type      = "{entry[sourceType]}",
+    doi       = "{entry[doi]}",
+    pages     = "{entry[pages]}",
+    url       = "{entry[url]}",
+    urldate   = "{entry[urldate]}"
+}}'''
     }
