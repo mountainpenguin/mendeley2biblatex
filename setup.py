@@ -50,7 +50,6 @@ setup(
         'Intended Audience :: Science/Research',
         'Topic :: Utilities',
         'Topic :: Scientific/Engineering',
-        'Topic :: Scientific/Engineering :: Text Editors',
         'Topic :: Text Processing :: General',
         'Environment :: Console',
 
