@@ -20,6 +20,6 @@ deploy:
       secure: "KOSF1n0uFYySH5rRDBSsvTu4ncjQMJnt1K1vhettKSgPg4VSQxDXFBPo+96l26hx5pqYbpr1SBmp3INlhk3UCViQdmqs7I3U4rKQ19ZUW96Ti7ige1nzHki+bbl03SvuXCsOjDYK9+t11F1YPuBQ8PzlalyQ24rs09KAnnpi6g+BNM0SQL1BiP09dzljYvxI/mKQLL2W8ESyTsSocABE+BleURFQQfl0nMVbPkE6LKycfcIvai6ceIW0BPyJv3bGY1flfvd+g9zDj/kBBcb+uBazjMaiA7RTuZKaVQboaa2VcTOThybeNACRMTmhr7yWraXcCPuah58x7nZcDqg9RkDFCiXPc48TxIx4/tDqSfrPE1VzQyWCmzdSUmktKvnEIBG5UhK/lFIFfe21BFErYCatEuaTq5OFTlwX5uxD/4UNykrsiPRn6SVgeObFb9VQeJSuO6cYO080a/W1oFZH3rPEqp0iPwi8YFk5rSUMeyVheUAvcTaAzCTSkwwsuzV69j8EivK0MSPJeSRwWWDHk0lN8DLHC42ExoNW5kPpYEmFmrkjwPNxx1ZIHVik1ha0y1EXhFVyRWjTMPxqdbmXkUEquE0GL+ZXsqqPKEUKfuRMmKshP4t9FTrUm8fkGvFq+J+SFIpJRP7Rh9ZJNyuHY2Sk714AopsPe4Omwv56Rsg="
     on:
       tags: true
-      branch: master
+      repo: lioman/mendeley2biblatex
       python: 3.5
 script: tox
