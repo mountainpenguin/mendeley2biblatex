@@ -1,7 +1,7 @@
 language: python
 python:
   - '2.7'
-  - '3.3'
+  - '3.4'
   - '3.5'
   - pypy
 deploy:
@@ -13,3 +13,4 @@ deploy:
     tags: true
     distributions: sdist bdist_wheel
     repo: lioman/mendeley2biblatex
+script: tox
