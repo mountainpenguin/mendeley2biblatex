@@ -4,12 +4,13 @@ python:
 - '3.4'
 - '3.5'
 deploy:
+  matrix:
   - provider: pypi
     server: https://testpypi.python.org/pypi
-    distributions: "sdist bdist_wheel"
+    distributions: sdist bdist_wheel
     user: lioman
     password:
-      secure: RzxUG6Af9b79JyjgUIXSUkBYzw5l76/hYXIkGcewtW5tJa2IyrOuVXmhO7wvDIH/Ht3gRsx+Fx+d2vv3yksTQsjff1lBXA7rFHfDT+nqQ1A6Y2g2mAW7W/yKGHvcZJyLS/1eLPQOrA8KAymXFW3EozU50ZTP0vFQJ0V8lQcPP7SQ7BkO36kVpoxB3kn38PcDbFlBzWkI19MlJGhJRqrnrdrrko8P2DQ4UKZxhYh/Duu2dXSwaxjZZZ20gYXuFIyQKnghVzdcHSrzhasOYSO8nlp42+VIFdk3tmd9Sa/VLt+jD/RMdB58G/LuZYh2yi8gDfmafnys2rvethjAUezc/FY1mAoMxPQJUy7uAuvlNoNeDJOy/wyCg90ZGCAXqILQu1cdnSk5tiSOAMaYiL5cHi0csiwkcBalJpIrySRPTHP0/ww38/Hmql+KurPKiO9LnLCLFjSexfO4yEhTYaoF51SFla77YnPggUXpZuvomcq/SO/1RYHoDdWc4T1iqJZw7q2ICyKXZ4A8oHFWq/YFIcDYYRNsXnFuFJY2Dm7jWtkWelcAjy+EYRO2UtR/gd06SD9EX8++uJ1m1pEgNFT6nThew3a9LaYWHfSs4Qu9+QAgXdP10k27z35VtuQRB01T+CdwRwR2FIm8fIAAwbSGr3ZbJ2lymaA1gTszvr3xUWo=
+      secure: cKmaYomiF0Yxn0WRtNQXdMvRbcdG9ieir3t56VK7fJQbVxW4/4Ny8hsSWp0hvr0bA86n4CJ83ahcLgyJbzSdH4AlYA9wVvxTb3diZ+h7IfE1l3CjnRiOkmYwaqfv+e19XzwSEqGevnrYTzQ4UN/SqGM2t+H0SrBnH4SDQ6oFunZ/nUYtbH3BGoYZAY580WNpUMwM13/vjCeCcXHzD68ZCSaO/JhT+hi3XKncBQZ/dYrGqlrMjx/g0sEf4JFrRXFvZZu3uEEOqJ7MmpcX78TM1SnZjZ/FALJmJwa0wEAmbbo7THGQ4L7pDLmAz/GnVeVt90zfGk2CZ7GhVaMRjhby4+wN2Jrr05mfxYpZtCO/RyXBoBDK101g3nkXhDKzFzTpg122fQL/cXzH8zIJLEaRGA6mQsOMzc2c7JIdNSPZ5fs9uD7kUYLYwUJrS1u2UY+oslDr1lsOYQALwRaKB8BdNqB+WzmWf8Pbyy2K+PPl0F8A43UqoOiFzGV0/y0Lp4kRVvr5NX22fSSrjdxQBF9/UwAWUObn4AF2WqroLKjPBXnzVRrAUv6Y78tGC6mWAPNlFFYu6CyAwJUvVmf1szEZdmAaG8mKrlc9AoM2z+tbkuxTJ3HNe9uDc6DIew7kNF0CoQ2/QrLa9Hpv5IUiqDoy4VVIBupq5XeRIvtszFJt1JA=
     on:
       tags: false
       branch: master
