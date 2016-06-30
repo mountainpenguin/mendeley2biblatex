@@ -48,7 +48,8 @@ setup(
 
         # Indicate who your project is intended for
         'Intended Audience :: Science/Research',
-        'Topic :: Scientific/Engineering :: Utilities',
+        'Topic :: Utilities',
+        'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Text Editors',
         'Topic :: Text Processing :: General',
         'Environment :: Console',
