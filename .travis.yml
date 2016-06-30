@@ -1,12 +1,11 @@
 language: python
 python:
-- '2.7'
 - '3.4'
 - '3.5'
 deploy:
   - provider: pypi
     server: https://testpypi.python.org/pypi
-    distributions: sdist
+    distributions: sdist bdist_wheel
     user: lioman_test
     password:
       secure: "gbdUvZSFdd480mqMANycRwIu8qyBHhr6WYe3QRMSJbJO1HJ5QKzHpaCgyGLzbSPvyVMVviGEor1tOpWDwpZk8j+fj8fVubYaoXx61jvd4BHuXNRsVHaR3etNzI398yvZSa7NJXx+h69kqzQb9Q/98LxU4aUDkKF09ZATqHdae6OdBvU+4NCkCm0P9EDQU0TQqyVW1J4GQ0Af2Jwrp9R6baWaifVQvgLfBfCrFLmeZG0oHtLIX/91b6ANCWEmQ7bv8ENmFs5+HjLa53Ol1WZZtEJR+VSzQ6JIlB0AlvMYlnjUZVU4lRS/00vfEJv1l/OmzxxJhJ9Dybj6cxoOEjfEfZrnHiUAuRxbPfhzgXunfSo4bfBFJsuRKglp9JktTxHNqIldEypMYcZqTYXoCBIwxsmItB+7/y8jvQHIGjY23/B/zMMA2AolHwHIT6NoJ5Li/8rTJSKrY7rt490kotDxyEj+uRyC1jkUUDKfzTOwX0kp8UxcEnfjZO95qsYaVD9TKYMxOFgSNhYCu1LNI3onXD1WXX/4OfVI0JC4qfRtoVVCUIkahesW1FrKXv/OSrJ15DBrSCqizcRQd3alheEV6GxLbgD207SEeH9l5emDNZHz9IA5Wk2TyRnNJ2GEcwsngJwZ7oYzefaX0xgkkI1QsGgPhJEh0OOwMf2KqCitPy8="
@@ -15,7 +14,7 @@ deploy:
       branch: master
       python: 3.5
   - provider: pypi
-    distributions: sdist
+    distributions: sdist bdist_wheel
     user: lioman
     password:
       secure: "KOSF1n0uFYySH5rRDBSsvTu4ncjQMJnt1K1vhettKSgPg4VSQxDXFBPo+96l26hx5pqYbpr1SBmp3INlhk3UCViQdmqs7I3U4rKQ19ZUW96Ti7ige1nzHki+bbl03SvuXCsOjDYK9+t11F1YPuBQ8PzlalyQ24rs09KAnnpi6g+BNM0SQL1BiP09dzljYvxI/mKQLL2W8ESyTsSocABE+BleURFQQfl0nMVbPkE6LKycfcIvai6ceIW0BPyJv3bGY1flfvd+g9zDj/kBBcb+uBazjMaiA7RTuZKaVQboaa2VcTOThybeNACRMTmhr7yWraXcCPuah58x7nZcDqg9RkDFCiXPc48TxIx4/tDqSfrPE1VzQyWCmzdSUmktKvnEIBG5UhK/lFIFfe21BFErYCatEuaTq5OFTlwX5uxD/4UNykrsiPRn6SVgeObFb9VQeJSuO6cYO080a/W1oFZH3rPEqp0iPwi8YFk5rSUMeyVheUAvcTaAzCTSkwwsuzV69j8EivK0MSPJeSRwWWDHk0lN8DLHC42ExoNW5kPpYEmFmrkjwPNxx1ZIHVik1ha0y1EXhFVyRWjTMPxqdbmXkUEquE0GL+ZXsqqPKEUKfuRMmKshP4t9FTrUm8fkGvFq+J+SFIpJRP7Rh9ZJNyuHY2Sk714AopsPe4Omwv56Rsg="
