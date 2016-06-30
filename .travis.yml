@@ -1,0 +1,14 @@
+language: python
+python:
+- '2.7'
+- '3.3'
+- pypy
+deploy:
+  provider: pypi
+  user: lioman
+  password:
+    secure: sD84SRRRfLF6rkGzOL+BMJpfanivUZt2GrEmS86AdR9CRNpU10cyRs5w1+y8aA1ew9IE+yxnJ5MMoalmgolFFTNrfeg2yZYYOuMm8KVgFqcHWKBl5Goa3Nwx/xNzycdQTqdHBN6NSGKJ1XgJjEKTbC3goCzTMv7uXAPQ1bSjPWdhjGM0dqfQNho7LOh7Q4fxs/KPmpuLkwnpQHtLJL86LArh4H6y2ZEPZJP0MB7sIH3NKrdzT0uaTg7fH4qpgYCNsSbID9W4NI4eozzWI3VW+x4P3jNeBWFFTN08yMv9Qrfhw2aTBdZwIHZwmu2vpe8KdQR00T2U68hujijJwVYTo9o8YvILHcKdL0DULLeQqIHwoj741kwtrnE04TgWVIGEvBGn60mnQK0FbQLlzKzWpUgP9we6KJwmQb43geMZxUbPsvJ30dNyCSrQ6J6BSLkeODXAcO67W1Xdd9DnpoqYX/QxDpZzk7PMrn9I7hJIEAEwOCXXN6ifpR+GCwwhqLjljpbsGYcNxdYyu5Ehy3r8wnqM9UxzRl497QfXnjRc/fszzz4pJC3qsEDOJcjwRUqJl0BBi6ovpRdazo2NXHcvZtZifOps3T0IJkECc06kzBWgC3c8UgBGPXcV9nEXh0BJ11GvG+2pRg+zjaHuAlbeln35g8j3ml4kOv9/H5lt3n0=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: lioman/mendeley2biblatex
