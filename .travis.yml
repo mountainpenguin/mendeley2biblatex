@@ -6,12 +6,12 @@ python:
 deploy:
   - provider: pypi
     server: https://testpypi.python.org/pypi
+    distributions: "sdist bdist_wheel"
     user: lioman
     password:
-    secure: RzxUG6Af9b79JyjgUIXSUkBYzw5l76/hYXIkGcewtW5tJa2IyrOuVXmhO7wvDIH/Ht3gRsx+Fx+d2vv3yksTQsjff1lBXA7rFHfDT+nqQ1A6Y2g2mAW7W/yKGHvcZJyLS/1eLPQOrA8KAymXFW3EozU50ZTP0vFQJ0V8lQcPP7SQ7BkO36kVpoxB3kn38PcDbFlBzWkI19MlJGhJRqrnrdrrko8P2DQ4UKZxhYh/Duu2dXSwaxjZZZ20gYXuFIyQKnghVzdcHSrzhasOYSO8nlp42+VIFdk3tmd9Sa/VLt+jD/RMdB58G/LuZYh2yi8gDfmafnys2rvethjAUezc/FY1mAoMxPQJUy7uAuvlNoNeDJOy/wyCg90ZGCAXqILQu1cdnSk5tiSOAMaYiL5cHi0csiwkcBalJpIrySRPTHP0/ww38/Hmql+KurPKiO9LnLCLFjSexfO4yEhTYaoF51SFla77YnPggUXpZuvomcq/SO/1RYHoDdWc4T1iqJZw7q2ICyKXZ4A8oHFWq/YFIcDYYRNsXnFuFJY2Dm7jWtkWelcAjy+EYRO2UtR/gd06SD9EX8++uJ1m1pEgNFT6nThew3a9LaYWHfSs4Qu9+QAgXdP10k27z35VtuQRB01T+CdwRwR2FIm8fIAAwbSGr3ZbJ2lymaA1gTszvr3xUWo=
+      secure: RzxUG6Af9b79JyjgUIXSUkBYzw5l76/hYXIkGcewtW5tJa2IyrOuVXmhO7wvDIH/Ht3gRsx+Fx+d2vv3yksTQsjff1lBXA7rFHfDT+nqQ1A6Y2g2mAW7W/yKGHvcZJyLS/1eLPQOrA8KAymXFW3EozU50ZTP0vFQJ0V8lQcPP7SQ7BkO36kVpoxB3kn38PcDbFlBzWkI19MlJGhJRqrnrdrrko8P2DQ4UKZxhYh/Duu2dXSwaxjZZZ20gYXuFIyQKnghVzdcHSrzhasOYSO8nlp42+VIFdk3tmd9Sa/VLt+jD/RMdB58G/LuZYh2yi8gDfmafnys2rvethjAUezc/FY1mAoMxPQJUy7uAuvlNoNeDJOy/wyCg90ZGCAXqILQu1cdnSk5tiSOAMaYiL5cHi0csiwkcBalJpIrySRPTHP0/ww38/Hmql+KurPKiO9LnLCLFjSexfO4yEhTYaoF51SFla77YnPggUXpZuvomcq/SO/1RYHoDdWc4T1iqJZw7q2ICyKXZ4A8oHFWq/YFIcDYYRNsXnFuFJY2Dm7jWtkWelcAjy+EYRO2UtR/gd06SD9EX8++uJ1m1pEgNFT6nThew3a9LaYWHfSs4Qu9+QAgXdP10k27z35VtuQRB01T+CdwRwR2FIm8fIAAwbSGr3ZbJ2lymaA1gTszvr3xUWo=
     on:
       tags: false
-      distributions: sdist bdist_wheel
       branch: master
       python: 3.5
 script: tox
