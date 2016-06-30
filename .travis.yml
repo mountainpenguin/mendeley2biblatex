@@ -13,4 +13,5 @@ deploy:
     tags: true
     distributions: sdist bdist_wheel
     repo: lioman/mendeley2biblatex
+    python: 3.5
 script: tox
