@@ -22,3 +22,6 @@ The package only reads your database, but to avoid any loss it is **recommended*
 Then run mendeley2biblatex on your file with
 
     mendeley2bibtex -o mendeley.bib mendeley.sqlite
+
+To see all options use
+    mendeley2biblatex -h
