@@ -21,6 +21,6 @@ deploy:
     on:
       tags: false
       repo: lioman/mendeley2biblatex
-      all_branches: master
+      branch: master
       python: 3.5
 script: tox
