@@ -3,23 +3,23 @@ python:
 #- '3.4'
 - '3.5'
 deploy:
-#  - provider: pypi
-#    server: https://testpypi.python.org/pypi
-#    distributions: sdist bdist_wheel
-#    user: lioman_test
-#    password:
-#      secure: "gbdUvZSFdd480mqMANycRwIu8qyBHhr6WYe3QRMSJbJO1HJ5QKzHpaCgyGLzbSPvyVMVviGEor1tOpWDwpZk8j+fj8fVubYaoXx61jvd4BHuXNRsVHaR3etNzI398yvZSa7NJXx+h69kqzQb9Q/98LxU4aUDkKF09ZATqHdae6OdBvU+4NCkCm0P9EDQU0TQqyVW1J4GQ0Af2Jwrp9R6baWaifVQvgLfBfCrFLmeZG0oHtLIX/91b6ANCWEmQ7bv8ENmFs5+HjLa53Ol1WZZtEJR+VSzQ6JIlB0AlvMYlnjUZVU4lRS/00vfEJv1l/OmzxxJhJ9Dybj6cxoOEjfEfZrnHiUAuRxbPfhzgXunfSo4bfBFJsuRKglp9JktTxHNqIldEypMYcZqTYXoCBIwxsmItB+7/y8jvQHIGjY23/B/zMMA2AolHwHIT6NoJ5Li/8rTJSKrY7rt490kotDxyEj+uRyC1jkUUDKfzTOwX0kp8UxcEnfjZO95qsYaVD9TKYMxOFgSNhYCu1LNI3onXD1WXX/4OfVI0JC4qfRtoVVCUIkahesW1FrKXv/OSrJ15DBrSCqizcRQd3alheEV6GxLbgD207SEeH9l5emDNZHz9IA5Wk2TyRnNJ2GEcwsngJwZ7oYzefaX0xgkkI1QsGgPhJEh0OOwMf2KqCitPy8="
-#    on:
-#      tags: false
-#      branch: master
-#      python: 3.5
+  - provider: pypi
+    server: https://testpypi.python.org/pypi
+    distributions: sdist bdist_wheel
+    user: lioman_test
+    password:
+      secure: "gbdUvZSFdd480mqMANycRwIu8qyBHhr6WYe3QRMSJbJO1HJ5QKzHpaCgyGLzbSPvyVMVviGEor1tOpWDwpZk8j+fj8fVubYaoXx61jvd4BHuXNRsVHaR3etNzI398yvZSa7NJXx+h69kqzQb9Q/98LxU4aUDkKF09ZATqHdae6OdBvU+4NCkCm0P9EDQU0TQqyVW1J4GQ0Af2Jwrp9R6baWaifVQvgLfBfCrFLmeZG0oHtLIX/91b6ANCWEmQ7bv8ENmFs5+HjLa53Ol1WZZtEJR+VSzQ6JIlB0AlvMYlnjUZVU4lRS/00vfEJv1l/OmzxxJhJ9Dybj6cxoOEjfEfZrnHiUAuRxbPfhzgXunfSo4bfBFJsuRKglp9JktTxHNqIldEypMYcZqTYXoCBIwxsmItB+7/y8jvQHIGjY23/B/zMMA2AolHwHIT6NoJ5Li/8rTJSKrY7rt490kotDxyEj+uRyC1jkUUDKfzTOwX0kp8UxcEnfjZO95qsYaVD9TKYMxOFgSNhYCu1LNI3onXD1WXX/4OfVI0JC4qfRtoVVCUIkahesW1FrKXv/OSrJ15DBrSCqizcRQd3alheEV6GxLbgD207SEeH9l5emDNZHz9IA5Wk2TyRnNJ2GEcwsngJwZ7oYzefaX0xgkkI1QsGgPhJEh0OOwMf2KqCitPy8="
+    on:
+      tags: false
+      branch: master
+      python: 3.5
   - provider: pypi
     distributions: sdist bdist_wheel
     user: lioman
     password:
       secure: "fSb9InswW0GV+VErIBjpRWwYcWP4UNXw60dwBEUhBEaevvz1HSwS1XEzWPRa15EUxIbxYT1mZpoezgHLciAvvPq+cIEipHUwAbPIi55mm6oY36npmbbK3WeCbUemnr+Fft0T6m+qxyxFsGtzVtighHoqyfW8CXDNtkVd396OA5W1q/dlnb0OeD63aZwnlaxa9TfAKC6o4UBUDPUl/FzKT7fDJt+3Ym+eSKOuExePyVfwjJyQjx1T29Ot5OdvTucG1ll3lBnJGrHxydhM26RsjvB1tt5acaMHUdgrs16uFZTT2mrXi866/zydgMU5GAkVMB/H9jShnSkLK2G9D4cvkKZYO86LgjBkuCUcyibErm88p1TQJ9XG2cPAJyxUTAPpcdEaU4yH4FflNKss5bBV+74Ts83QnC5cbAcvmbLtTu1e3hDiVNkfEgV3hs6F0eO245ZEbeLgdb7dszdtzNQavAkNdfr3lpv+WF815WivS2GHls2yrqNfR4/8NNSZ+hVfOexHOtsHwGHGGwi67nSJHGGsVqLVwBq64BOizUhygtX/A3jfTyC5kjWFQfK6ItaUlOKFsQ2Nr+LZl1QwBwN9k1webYMJUfVRNOpImxfJ+3cXRts8BAaSRmxkNX86f00eZVOif9/uENwn3jeIu1/JvB4gGFbrqcj5fo+ONq44odk="
     on:
-      tags: false
+      tags: true
       repo: lioman/mendeley2biblatex
       branch: master
       python: 3.5
