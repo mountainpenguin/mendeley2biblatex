@@ -96,15 +96,19 @@ class LibraryConverter:
                 authors.append(', '.join(author))
             entry['authors'] = ' and '.join(authors)
 
-            BibEntry.clean_characters(entry)
+            if isinstance(entry['url'],bytes):
+                entry['url'] = entry['url'].decode('UTF-8')
 
+            BibEntry.clean_characters(entry)
             # If you need to add more templates:
             #    all types of templates are available at
             #    http://www.cs.vassar.edu/people/priestdo/tips/bibtex
             #    all avaliable types are described in biblatex documentation
             #    ftp://ftp.mpi-sb.mpg.de/pub/tex/mirror/ftp.dante.de/pub/tex/macros/latex/contrib/biblatex/doc/biblatex.pdf
             try:
-                formatted_entry = BibEntry.TEMPLATES.get(entry['type']).format(entry=entry)
+                formatted_entry = BibEntry.TEMPLATES.get(entry['type']).format(
+                    entry=entry)
+
             except AttributeError:
                 if not quiet:
                     print('''Unhandled entry type {0}, please add your own template.'''.format(
