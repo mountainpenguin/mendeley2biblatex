@@ -42,7 +42,7 @@ class BibEntry:
 @inbook{{{entry[citationKey]},
     author    = "{entry[authors]}",
     title     = "{entry[title]}",
-    booktitle = "{entry[publication]}"
+    booktitle = "{entry[publication]}",
     publisher = "{entry[publisher]}",
     year      = "{entry[year]}",
     volume    = "{entry[volume]}",
