@@ -96,10 +96,11 @@ class LibraryConverter:
                 authors.append(', '.join(author))
             entry['authors'] = ' and '.join(authors)
 
-            if isinstance(entry['url'],bytes):
+            if isinstance(entry['url'], bytes):
                 entry['url'] = entry['url'].decode('UTF-8')
 
             BibEntry.clean_characters(entry)
+            print(entry['publisher'])
             # If you need to add more templates:
             #    all types of templates are available at
             #    http://www.cs.vassar.edu/people/priestdo/tips/bibtex

@@ -66,7 +66,7 @@ class BibEntry:
 @inbook{{{entry[citationKey]},
     author    = "{entry[authors]}",
     title     = "{entry[title]}",
-    type = "{entry[publication]}"
+    type = "{entry[publication]}",
     institution = "{entry[institution]}",
     year      = "{entry[year]}",
     type      = "{entry[sourceType]}",
@@ -103,6 +103,7 @@ class BibEntry:
             '∕': '/',  # utf8 2215, math division
             'κ': 'k',  # Greek kappa
             '×': 'x',  # times
+            '"': "'"
         }
 
         # Which field shall we check and convert
