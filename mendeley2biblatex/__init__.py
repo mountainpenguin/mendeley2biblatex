@@ -1,6 +1,7 @@
 import sys
 from argparse import ArgumentParser
 
+import setup
 from mendeley2biblatex.library_converter import LibraryConverter
 
 
@@ -21,6 +22,7 @@ def main():
         help="BibTeX file name, else output will be printed to stdout")
     parser.add_argument('input', metavar='INPUT_FILE', nargs='?',
         help='the mendeley database')
+    parser.add_argument('--version', action='version', version='mendeley2biblatex')
 
     args = parser.parse_args()
 
