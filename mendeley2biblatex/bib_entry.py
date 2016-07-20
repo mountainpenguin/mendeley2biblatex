@@ -97,6 +97,7 @@ class BibEntry:
         char_to_replace = {
             # LaTeX special char
             '&': '\&',
+            '#': '\#',
             # UTF8 not understood by inputenc
             '–': '--',  # utf8 2014, special dash
             '—': '--',  # utf8 2013, special dash
