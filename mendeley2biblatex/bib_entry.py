@@ -66,18 +66,25 @@ class BibEntry:
     urldate   = "{entry[urldate]}"
 }}''',
         'Report': '''
-@inbook{{{entry[citationKey]},
-    author    = "{entry[authors]}",
-    title     = "{entry[title]}",
-    type = "{entry[publication]}",
-    institution = "{entry[institution]}",
-    year      = "{entry[year]}",
-    type      = "{entry[sourceType]}",
-    doi       = "{entry[doi]}",
-    pages     = "{entry[pages]}",
-    url       = "{entry[url]}",
-    urldate   = "{entry[urldate]}"
+@techreport{{{entry[citationKey]},
+    author = "{entry[authors]}",
+    title = "{entry[title]}",
+    url = "{entry[url]}",
+    year = "{entry[year]}"
 }}''',
+#        'Report': '''
+#@inbook{{{entry[citationKey]},
+#    author    = "{entry[authors]}",
+#    title     = "{entry[title]}",
+#    type = "{entry[publication]}",
+#    institution = "{entry[institution]}",
+#    year      = "{entry[year]}",
+#    type      = "{entry[sourceType]}",
+#    doi       = "{entry[doi]}",
+#    pages     = "{entry[pages]}",
+#    url       = "{entry[url]}",
+#    urldate   = "{entry[urldate]}"
+#}}''',
         'Thesis': '''
 @thesis{{{entry[citationKey]},
     author    = "{entry[authors]}",
