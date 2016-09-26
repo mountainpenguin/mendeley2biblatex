@@ -113,6 +113,9 @@ class LibraryConverter:
                 if not quiet:
                     print('''Unhandled entry type {0}, please add your own template.'''.format(
                         entry['type']))
+                    print('Entry with error was:')
+                    print(entry)
+                    input('Press any key to continue...')
                 continue
             f.write(formatted_entry)
 
