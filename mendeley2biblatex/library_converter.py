@@ -94,7 +94,11 @@ class LibraryConverter:
             authors_list = c2.fetchall()
             authors = []
             for author in authors_list:
-                authors.append(', '.join(author))
+                a = ", ".join(author)
+                if a == "World Health Organisation, ":
+                    a = "{World Health Organisation}"
+                authors.append(a)
+
             entry['authors'] = ' and '.join(authors)
 
             if isinstance(entry['url'], bytes):
