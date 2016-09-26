@@ -1,7 +1,6 @@
 import sys
 from argparse import ArgumentParser
 
-import setup
 from mendeley2biblatex.library_converter import LibraryConverter
 
 

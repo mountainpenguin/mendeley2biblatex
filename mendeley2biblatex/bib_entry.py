@@ -1,10 +1,13 @@
+from . import medline
+M = medline.MedLine()
+
 class BibEntry:
     TEMPLATES = {
         'JournalArticle': '''
 @article{{{entry[citationKey]},
     author    = "{entry[authors]}",
     title     = "{entry[title]}",
-    journal   = "{entry[publication]}",
+    journal   = "{entry[journal]}",
     number    = "{entry[issue]}",
     volume    = "{entry[volume]}",
     pages     = "{entry[pages]}",
@@ -93,22 +96,26 @@ class BibEntry:
     def clean_characters(entry):
         """A helper function to convert special characters to LaTeX characters"""
 
+        entry["journal"] = M.get_abbr(entry["publication"], entry["issn"])
+        entry["title"] = M.get_ital(entry["title"])
+
         # List of char and replacement, add your own list below
         char_to_replace = {
             # LaTeX special char
             '&': '\&',
             '#': '\#',
+            '%': '\%',
             # UTF8 not understood by inputenc
-            '–': '--',  # utf8 2014, special dash
-            '—': '--',  # utf8 2013, special dash
-            '∕': '/',  # utf8 2215, math division
-            'κ': 'k',  # Greek kappa
-            '×': 'x',  # times
-            '"': "'"
+            # '–': '--',  # utf8 2014, special dash
+            # '—': '--',  # utf8 2013, special dash
+            # '∕': '/',  # utf8 2215, math division
+            # 'κ': 'k',  # Greek kappa
+            # '×': 'x',  # times
+            '"': "'",
         }
 
         # Which field shall we check and convert
-        entry_key = ['publisher', 'publication', 'title']
+        entry_key = ['publisher', 'publication', 'title', 'journal']
 
         for k in entry_key:
             for char, repl_char in char_to_replace.items():

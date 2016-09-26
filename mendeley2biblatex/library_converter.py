@@ -49,6 +49,7 @@ class LibraryConverter:
             D.type,
             D.doi,
             D.publisher,
+            D.issn,
             D.publication,
             D.volume,
             D.issue,
