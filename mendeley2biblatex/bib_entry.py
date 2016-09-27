@@ -34,6 +34,7 @@ class BibEntry:
         'Book': '''
 @book{{{entry[citationKey]},
     author    = "{entry[authors]}",
+    editor    = "{entry[editors]}",
     title     = "{entry[title]}",
     publisher = "{entry[publisher]}",
     year      = "{entry[year]}",
@@ -44,6 +45,7 @@ class BibEntry:
         'BookSection': '''
 @inbook{{{entry[citationKey]},
     author    = "{entry[authors]}",
+    editor    = "{entry[editors]}",
     title     = "{entry[title]}",
     booktitle = "{entry[publication]}",
     publisher = "{entry[publisher]}",

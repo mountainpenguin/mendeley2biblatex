@@ -87,19 +87,25 @@ class LibraryConverter:
         for entry in c.execute(query):
             c2 = db.cursor()
             c2.execute('''
-        SELECT lastName, firstNames
+        SELECT lastName, firstNames, contribution
         FROM DocumentContributors
         WHERE documentId = ?
         ORDER BY id''', (entry['id'],))
             authors_list = c2.fetchall()
             authors = []
+            editors = []
             for author in authors_list:
-                a = ", ".join(author)
-                if a == "World Health Organisation, ":
-                    a = "{World Health Organisation}"
-                authors.append(a)
+                if author[-1] == "DocumentAuthor":
+                    a = ", ".join(author[:-1])
+                    if a == "World Health Organisation, ":
+                        a = "{World Health Organisation}"
+                    authors.append(a)
+                else:
+                    e = ", ".join(author[:-1])
+                    editors.append(e)
 
             entry['authors'] = ' and '.join(authors)
+            entry['editors'] = ' and '.join(editors)
 
             if isinstance(entry['url'], bytes):
                 entry['url'] = entry['url'].decode('UTF-8')
