@@ -6,7 +6,7 @@ class BibEntry:
         'JournalArticle': '''
 @article{{{entry[citationKey]},
     author    = "{entry[authors]}",
-    title     = "{entry[title]}",
+    title     = {{{{{entry[title]}}}}},
     journal   = "{entry[journal]}",
     number    = "{entry[issue]}",
     volume    = "{entry[volume]}",
